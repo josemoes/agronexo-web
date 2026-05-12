@@ -1,22 +1,240 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const lines = [
+  {
+    name: 'Productos',
+    href: '/productos',
+    description: 'Melaza, hidroinfiltradores, nitrato potásico y urea. Los insumos que tu finca necesita, disponibles directamente en cooperativa.',
+    iconPath: 'M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z',
+  },
+  {
+    name: 'Servicios',
+    href: '/servicios',
+    description: 'Desde una poda puntual hasta un proyecto integral de optimización. Asesoramiento técnico adaptado a tu terreno y tu cultivo.',
+    iconPath: 'M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z',
+  },
+  {
+    name: 'Arrendamientos',
+    href: '/fincas',
+    description: 'Tierras sin gestionar, activadas con un paquete completo. Nosotros nos encargamos; tú recuperas la rentabilidad.',
+    iconPath: 'M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z',
+  },
+];
+
+const projects = [
+  {
+    name: 'Finca El Alcornocal',
+    category: 'Olivar',
+    location: 'Loja, Granada',
+    image: '/images/casos/finca-loja.webp',
+    alt: 'Olivar con muro de piedra antigua en paisaje de Loja, Granada',
+  },
+  {
+    name: 'Cortijo Las Niñas',
+    category: 'Almendro',
+    location: 'Antequera, Málaga',
+    image: '/images/casos/finca-antequera.webp',
+    alt: 'Plantación de almendros al atardecer en la campiña de Antequera',
+  },
+  {
+    name: 'Cortijo Los Picuales',
+    category: 'Olivar',
+    location: 'Martos, Jaén',
+    image: '/images/casos/finca-jaen.webp',
+    alt: 'Hileras de olivos en el paisaje característico de Jaén',
+  },
+  {
+    name: 'Hacienda El Olivar',
+    category: 'Olivar',
+    location: 'Iznájar, Córdoba',
+    image: '/images/casos/finca-cordoba.webp',
+    alt: 'Cortijo tradicional rodeado de olivares en la campiña cordobesa',
+  },
+];
 ---
 
 <BaseLayout
   title="AgroNexo Granada — Del dato a la rentabilidad agrícola"
   description="Productos, servicios de asesoramiento y gestión de fincas para el olivar y almendro de Granada."
 >
-  <section class="min-h-[60vh] flex items-center justify-center px-4">
-    <div class="text-center max-w-xl">
-      <p class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase mb-4">
-        Prototipo TFM
+
+  <!-- ── 1. HERO ─────────────────────────────────────────────────────────── -->
+  <section
+    class="relative min-h-screen flex items-center justify-center bg-agronexo-dark bg-cover bg-center"
+    style="background-image: url('/images/hero/olivar-amanecer.webp')"
+  >
+    <div class="absolute inset-0 bg-agronexo-dark/75"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center text-white">
+      <p class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase mb-6">
+        AgroNexo Granada
       </p>
-      <h1 class="font-display font-bold text-4xl md:text-5xl text-agronexo-dark mb-6 leading-tight">
-        Home en construcción
+      <h1 class="font-display font-bold text-4xl sm:text-5xl md:text-6xl leading-tight mb-6">
+        Del dato a la rentabilidad agrícola.
       </h1>
-      <p class="font-body text-base md:text-lg text-agronexo-warm">
-        Aquí irá el hero de AgroNexo Granada.
+      <p class="font-body text-lg sm:text-xl text-white/80 max-w-2xl mx-auto mb-10">
+        Asesoramiento técnico, productos de calidad y gestión de fincas para el olivar y almendro de Granada.
       </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/productos"
+          class="font-display font-semibold text-sm tracking-wide px-8 py-4 bg-white text-agronexo-dark rounded-md hover:bg-agronexo-olive hover:text-white transition-colors duration-200"
+        >
+          Descubre AgroNexo
+        </a>
+        <a
+          href="/contacto"
+          class="font-display font-semibold text-sm tracking-wide px-8 py-4 border border-white/70 text-white rounded-md hover:bg-white/10 transition-colors duration-200"
+        >
+          Habla con un asesor
+        </a>
+      </div>
     </div>
   </section>
+
+  <!-- ── 2. QUIÉNES SOMOS ───────────────────────────────────────────────── -->
+  <section class="py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
+
+        <div>
+          <p class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase mb-5">
+            Quiénes somos
+          </p>
+          <h2 class="font-display font-bold text-3xl md:text-4xl text-agronexo-dark mb-6 leading-snug">
+            Tradición agrícola.<br />Datos de hoy.
+          </h2>
+          <div class="font-body text-base md:text-lg text-agronexo-text leading-relaxed space-y-4">
+            <p>
+              El olivo lleva siglos dando forma a este paisaje. Conoce el suelo, las estaciones y la paciencia que el campo exige. AgroNexo nació para añadir una sola capa a eso: los datos justos en el momento preciso.
+            </p>
+            <p>
+              No te pedimos que cambies cómo trabajas. Cuestionario rápido en WhatsApp, diagnóstico personalizado de tu finca y una propuesta concreta — sin aplicaciones nuevas, sin jerga técnica.
+            </p>
+            <p>
+              El nexo entre lo que ya sabes y lo que los datos pueden añadir.
+            </p>
+          </div>
+          <a
+            href="/asesoramiento"
+            class="inline-block mt-8 font-display font-semibold text-sm tracking-wide text-agronexo-olive hover:text-agronexo-dark transition-colors duration-200"
+          >
+            Cómo trabajamos →
+          </a>
+        </div>
+
+        <div class="overflow-hidden rounded-lg aspect-[4/3]">
+          <img
+            src="/images/storytelling/manos-aceitunas.webp"
+            alt="Manos curtidas de agricultor recogiendo aceitunas en un olivar andaluz"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 3. TRES LÍNEAS ─────────────────────────────────────────────────── -->
+  <section class="py-20 md:py-28 bg-agronexo-warm/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center mb-14">
+        <p class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase mb-4">
+          Nuestras líneas
+        </p>
+        <h2 class="font-display font-bold text-3xl md:text-5xl text-agronexo-dark">
+          Tres líneas, un mismo nexo.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {lines.map(({ name, href, description, iconPath }) => (
+          <div class="bg-white rounded-lg p-8 flex flex-col gap-5 border border-agronexo-warm/20 hover:border-agronexo-olive/40 transition-colors duration-200">
+            <div class="w-10 h-10 rounded-md bg-agronexo-olive/10 flex items-center justify-center text-agronexo-olive shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d={iconPath} />
+              </svg>
+            </div>
+            <h3 class="font-display font-bold text-xl text-agronexo-dark">{name}</h3>
+            <p class="font-body text-sm text-agronexo-text leading-relaxed flex-1">{description}</p>
+            <a
+              href={href}
+              class="font-display font-semibold text-sm text-agronexo-olive hover:text-agronexo-dark transition-colors duration-200"
+            >
+              Conoce más →
+            </a>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 4. PROYECTOS ───────────────────────────────────────────────────── -->
+  <section class="py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
+        <div>
+          <p class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase mb-4">
+            Proyectos
+          </p>
+          <h2 class="font-display font-bold text-3xl md:text-5xl text-agronexo-dark">
+            El campo, en detalle.
+          </h2>
+        </div>
+        <a
+          href="/fincas"
+          class="font-display font-semibold text-sm text-agronexo-olive hover:text-agronexo-dark transition-colors duration-200 shrink-0"
+        >
+          Ver todos →
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {projects.map(({ name, category, location, image, alt }) => (
+          <article class="group rounded-lg overflow-hidden border border-agronexo-warm/20 hover:border-agronexo-olive/30 transition-colors duration-200">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src={image}
+                alt={alt}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-5 flex flex-col gap-1">
+              <span class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase">
+                {category}
+              </span>
+              <h3 class="font-display font-bold text-lg text-agronexo-dark">{name}</h3>
+              <p class="font-body text-sm text-agronexo-warm">{location}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 5. CTA FINAL ───────────────────────────────────────────────────── -->
+  <section class="bg-agronexo-dark py-20 md:py-28">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center text-white">
+      <h2 class="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight mb-6">
+        Tu finca tiene más que dar.<br />Los datos te lo demuestran.
+      </h2>
+      <p class="font-body text-base md:text-lg text-white/70 max-w-xl mx-auto mb-10">
+        Cuéntanos tu situación y te preparamos un diagnóstico sin compromiso.
+      </p>
+      <a
+        href="/contacto"
+        class="inline-block font-display font-semibold text-sm tracking-wide px-10 py-4 bg-agronexo-olive text-white rounded-md hover:bg-white hover:text-agronexo-dark transition-colors duration-200"
+      >
+        Habla con AgroNexo
+      </a>
+    </div>
+  </section>
+
 </BaseLayout>
