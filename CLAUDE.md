@@ -93,7 +93,7 @@ Sin slugs dinámicos. Sin fichas individuales de producto/servicio. Cada landing
 
 ## Paleta corporativa
 
-Estos cinco colores son la marca. No se sale de aquí salvo para microvariaciones (opacidades, sombras tenues).
+Estos cinco colores son la marca. No se sale de aquí salvo para microvariaciones (opacidades, sombras tenues) o excepciones explícitamente documentadas más abajo.
 
 ```js
 // tailwind.config.mjs (extracto)
@@ -124,6 +124,10 @@ theme: {
 - **#ffffff (blanco)** → fondo principal de la web, texto sobre verde oscuro.
 
 **Cómo NO usarla:** mezclar más de tres colores en una misma sección. Mantener cada sección con un color dominante + uno o dos acentos.
+
+**Excepción documentada — color CTA:**
+
+- **#c4622d (terracota)** → token `agronexo-cta`. Uso exclusivo del botón flotante de Telegram (FAB en `BaseLayout.astro`). Color complementario al verde en la rueda de color; encaja con el mood mediterráneo del moodboard (terracota, ocre). **No usar en ningún otro elemento de la web.** Definido en `src/styles/global.css` como `--color-agronexo-cta`.
 
 ---
 
@@ -241,7 +245,7 @@ En `src/layouts/`:
 - Modales que cubran la pantalla al entrar (pop-up newsletter, etc.).
 - Cookie banners gigantes (uno discreto en footer está bien).
 - Lenguaje corporativo vacío.
-- Colores fuera de la paleta corporativa.
+- Colores fuera de la paleta corporativa (salvo `agronexo-cta` en el FAB de Telegram, que está documentado).
 
 ---
 

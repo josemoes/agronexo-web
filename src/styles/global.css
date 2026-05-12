@@ -11,6 +11,8 @@
   --color-agronexo-text:  #2e2e2e;
   --color-agronexo-warm:  #a2a092;
   --color-agronexo-bg:    #ffffff;
+  /* CTA accent — terracotta, complementary to green. Exclusive use: Telegram FAB */
+  --color-agronexo-cta:   #c4622d;
 
   /* Font families */
   --font-display: "Montserrat", system-ui, sans-serif;

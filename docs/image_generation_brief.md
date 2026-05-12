@@ -52,10 +52,11 @@ Para búsquedas en Unsplash/Pexels, los términos clave equivalentes son:
 |---|---|---|---|
 | `hero/olivar-amanecer.webp` | 1920×1080 | Hero principal | Wide panoramic shot of an Andalusian olive grove at dawn, rolling hills, golden mist, distant farmhouse |
 | `storytelling/manos-aceitunas.webp` | 1200×900 | Sección "Quiénes somos" | Close-up of weathered hands of an elderly Spanish farmer picking olives, woven basket |
-| `casos/finca-loja.webp` | 800×600 | Card caso | Olive grove with old stone wall, Loja landscape style |
-| `casos/finca-antequera.webp` | 800×600 | Card caso | Hilly olive plantation at sunset, Antequera-style countryside |
-| `casos/finca-jaen.webp` | 800×600 | Card caso | Endless olive trees rows in Jaén-style landscape |
-| `casos/finca-cordoba.webp` | 800×600 | Card caso | Traditional cortijo with olive trees, Córdoba countryside |
+| photo-1767022094253-e24308b8947e | Olivar | Ronda, Málaga | Olivar de la Serranía | Alexis Presa (@alexispresa) |
+| photo-1777335809850-f03186bfaf32 | Olivar | Montes de Málaga | Cortijo del Mirador | Paula Serrano (@paula_serrano) |
+| photo-1727355661422-2ca983a59e8e | Olivar | Granada | Hacienda San Isidro | Virginie Bécaïs (@incities) |
+| photo-1624963166345-1b5caa966d21 | Olivar | Úbeda, Jaén | Mar de Olivos | Jorge Fernández Salas (@jorgefdezsalas) |
+
 
 ### Productos
 
