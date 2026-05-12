@@ -1,17 +1,22 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="AgroNexo Granada — Del dato a la rentabilidad agrícola"
+  description="Productos, servicios de asesoramiento y gestión de fincas para el olivar y almendro de Granada."
+>
+  <section class="min-h-[60vh] flex items-center justify-center px-4">
+    <div class="text-center max-w-xl">
+      <p class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase mb-4">
+        Prototipo TFM
+      </p>
+      <h1 class="font-display font-bold text-4xl md:text-5xl text-agronexo-dark mb-6 leading-tight">
+        Home en construcción
+      </h1>
+      <p class="font-body text-base md:text-lg text-agronexo-warm">
+        Aquí irá el hero de AgroNexo Granada.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

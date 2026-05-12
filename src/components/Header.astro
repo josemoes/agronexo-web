@@ -1,0 +1,103 @@
+---
+const navLinks = [
+  { label: 'Inicio',         href: '/' },
+  { label: 'Productos',      href: '/productos' },
+  { label: 'Servicios',      href: '/servicios' },
+  { label: 'Asesoramiento',  href: '/asesoramiento' },
+  { label: 'Fincas',         href: '/fincas' },
+  { label: 'Contacto',       href: '/contacto' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 bg-agronexo-bg border-b border-agronexo-warm/20 shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 md:h-20">
+
+      <!-- Logo -->
+      <a href="/" aria-label="AgroNexo — Inicio" class="shrink-0">
+        <img
+          src="/logo.svg"
+          alt="AgroNexo Granada"
+          class="h-9 md:h-11 w-auto"
+        />
+      </a>
+
+      <!-- Desktop nav -->
+      <nav aria-label="Navegación principal" class="hidden md:flex items-center gap-8">
+        {navLinks.map(({ label, href }) => (
+          <a
+            href={href}
+            class={[
+              'font-display text-sm font-semibold tracking-wide transition-colors duration-200',
+              currentPath === href
+                ? 'text-agronexo-olive'
+                : 'text-agronexo-text hover:text-agronexo-olive',
+            ].join(' ')}
+            aria-current={currentPath === href ? 'page' : undefined}
+          >
+            {label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Mobile nav: CSS-only hamburger via <details> -->
+      <details class="md:hidden group">
+        <summary
+          class="list-none cursor-pointer p-2 rounded-md text-agronexo-text hover:text-agronexo-olive transition-colors"
+          aria-label="Abrir menú de navegación"
+        >
+          <!-- Hamburger icon (closed) -->
+          <svg
+            class="block group-open:hidden w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <!-- X icon (open) -->
+          <svg
+            class="hidden group-open:block w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </summary>
+
+        <!-- Dropdown menu -->
+        <nav
+          aria-label="Navegación móvil"
+          class="absolute left-0 right-0 top-full bg-agronexo-bg border-t border-agronexo-warm/20 shadow-md px-4 py-4"
+        >
+          <ul class="flex flex-col gap-1">
+            {navLinks.map(({ label, href }) => (
+              <li>
+                <a
+                  href={href}
+                  class={[
+                    'block py-3 px-3 rounded-md font-display text-sm font-semibold tracking-wide transition-colors duration-200',
+                    currentPath === href
+                      ? 'text-agronexo-olive bg-agronexo-olive/5'
+                      : 'text-agronexo-text hover:text-agronexo-olive hover:bg-agronexo-olive/5',
+                  ].join(' ')}
+                  aria-current={currentPath === href ? 'page' : undefined}
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </details>
+
+    </div>
+  </div>
+</header>

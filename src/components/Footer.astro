@@ -1,0 +1,120 @@
+---
+const currentYear = new Date().getFullYear();
+
+const lines = [
+  { label: 'Productos',     href: '/productos' },
+  { label: 'Servicios',     href: '/servicios' },
+  { label: 'Fincas',        href: '/fincas' },
+];
+
+const company = [
+  { label: 'Asesoramiento', href: '/asesoramiento' },
+  { label: 'Contacto',      href: '/contacto' },
+];
+
+const legal = [
+  { label: 'Aviso legal',        href: '#' },
+  { label: 'Política de privacidad', href: '#' },
+  { label: 'Política de cookies', href: '#' },
+];
+---
+
+<footer class="bg-agronexo-dark text-white">
+
+  <!-- Main footer body -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
+
+    <!-- Logo -->
+    <div class="mb-12">
+      <a href="/" aria-label="AgroNexo — Inicio">
+        <!-- Use logo.svg until white version is available; opacity reduces contrast on dark bg -->
+        <img
+          src="/logo.svg"
+          alt="AgroNexo Granada"
+          class="h-10 w-auto brightness-0 invert"
+        />
+      </a>
+    </div>
+
+    <!-- Tagline -->
+    <p class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight max-w-2xl mb-16">
+      Del dato a la rentabilidad agrícola.
+    </p>
+
+    <!-- Three-column link grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-10 mb-16 border-t border-white/10 pt-12">
+
+      <!-- Column 1: Lines -->
+      <div>
+        <h3 class="font-display font-semibold text-xs tracking-widest text-agronexo-warm uppercase mb-5">
+          Líneas AgroNexo
+        </h3>
+        <ul class="flex flex-col gap-3">
+          {lines.map(({ label, href }) => (
+            <li>
+              <a
+                href={href}
+                class="font-body text-sm text-white/70 hover:text-agronexo-olive transition-colors duration-200"
+              >
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Column 2: Company -->
+      <div>
+        <h3 class="font-display font-semibold text-xs tracking-widest text-agronexo-warm uppercase mb-5">
+          Empresa
+        </h3>
+        <ul class="flex flex-col gap-3">
+          {company.map(({ label, href }) => (
+            <li>
+              <a
+                href={href}
+                class="font-body text-sm text-white/70 hover:text-agronexo-olive transition-colors duration-200"
+              >
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Column 3: Legal -->
+      <div>
+        <h3 class="font-display font-semibold text-xs tracking-widest text-agronexo-warm uppercase mb-5">
+          Legal
+        </h3>
+        <ul class="flex flex-col gap-3">
+          {legal.map(({ label, href }) => (
+            <li>
+              <a
+                href={href}
+                class="font-body text-sm text-white/70 hover:text-agronexo-olive transition-colors duration-200"
+              >
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Copyright bar -->
+  <div class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="font-body text-xs text-white/40">
+        &copy; {currentYear} AgroNexo Granada. Todos los derechos reservados.
+      </p>
+      <p class="font-body text-xs text-white/30">
+        Prototipo TFM — no operativo
+      </p>
+    </div>
+  </div>
+
+</footer>
