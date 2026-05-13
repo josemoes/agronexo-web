@@ -1,25 +1,241 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroBanda from '../components/HeroBanda.astro';
+import PhaseStep from '../components/PhaseStep.astro';
+
+const includedItems = [
+  {
+    title: 'Visita técnica completa',
+    description: 'Recorremos la finca contigo, observamos, medimos y tomamos muestras.',
+    iconPath: 'M15 10.5a3 3 0 11-6 0 3 3 0 016 0zM19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z',
+  },
+  {
+    title: 'Análisis del sistema de riego',
+    description: 'Eficiencia hídrica, presión, distribución, posibles fugas y mejoras inmediatas.',
+    iconPath: 'M12 2.25c-.828 0-7.5 8.008-7.5 12.375a7.5 7.5 0 0015 0C19.5 10.258 12.828 2.25 12 2.25z',
+  },
+  {
+    title: 'Análisis de suelo',
+    description: 'Muestreo en distintas zonas, envío a laboratorio acreditado e interpretación en lenguaje claro.',
+    iconPath: 'M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.169.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5',
+  },
+  {
+    title: 'Diagnóstico productivo',
+    description: 'Estado del olivar, edad, salud, potencial de mejora y comparativa con fincas similares.',
+    iconPath: 'M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z',
+  },
+  {
+    title: 'Plan de mejora con prioridades',
+    description: 'Qué hacer primero, qué cuesta y qué resultados puedes esperar. Sin sorpresas.',
+    iconPath: 'M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    title: 'Ayudas y subvenciones',
+    description: 'Identificamos las ayudas que te corresponden y te acompañamos con el papeleo.',
+    iconPath: 'M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z',
+  },
+];
+
+const steps = [
+  {
+    number: '01',
+    eyebrow: 'VENIMOS A TU FINCA',
+    title: 'Visita inicial',
+    description: 'Una o dos horas en campo. Hablamos contigo, miramos cómo está todo, tomamos muestras y datos.',
+  },
+  {
+    number: '02',
+    eyebrow: 'ANALIZAMOS EN DETALLE',
+    title: 'Estudio',
+    description: 'Cruzamos suelo, riego, ciclo del cultivo y ayudas disponibles. Preparamos un informe completo.',
+  },
+  {
+    number: '03',
+    eyebrow: 'TE LO ENTREGAMOS',
+    title: 'Plan y acompañamiento',
+    description: 'Revisamos el plan contigo, resolvemos dudas y te acompañamos durante el primer año del proyecto.',
+  },
+];
+
+const reasons = [
+  {
+    title: 'Equipo propio en campo',
+    description: 'Nuestros Agro Advisors viven en Andalucía y conocen el olivar tradicional desde dentro. No subcontratamos.',
+    iconPath: 'M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z',
+  },
+  {
+    title: 'Plan a tu medida, no plantillas',
+    description: 'Cada finca es distinta. Tu plan no se parece al del vecino, aunque estéis en el mismo pueblo.',
+    iconPath: 'M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125',
+  },
+  {
+    title: 'Te acompañamos todo el año',
+    description: 'No te dejamos solo después de entregar el estudio. Estamos a un WhatsApp para cualquier duda.',
+    iconPath: 'M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z',
+  },
+];
 ---
 
 <BaseLayout
   title="Asesoramiento — AgroNexo Granada"
-  description="Estudio a medida para tu finca: diagnóstico in-situ, plan de optimización y seguimiento continuo para el olivar y almendro de Granada."
+  description="Estudio a medida para tu olivar: visita técnica, análisis de suelo y riego, diagnóstico productivo y plan de mejora con prioridades."
 >
 
-  <!-- Hero banda -->
+  <!-- ── 1. HERO BANDA ───────────────────────────────────────────────────── -->
   <HeroBanda
     image="/images/hero/asesoramiento.webp"
     eyebrow="AgroNexo Advisory"
-    title="Asesoramiento a medida"
-    subtitle="Diagnóstico in-situ, plan de optimización y seguimiento continuo para tu olivar."
+    title="Un estudio hecho a la medida de tu olivar"
+    subtitle="Te diseñamos la estrategia que tu finca necesita. Cuándo regar, qué aplicar, dónde ahorrar y qué ayudas pedir."
+    cta={{ label: 'Reserva tu primera visita', href: '/contacto' }}
+    minHeight="min-h-[55vh]"
   />
 
-  <!-- Placeholder -->
-  <section class="py-20 md:py-28">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <p class="font-body text-agronexo-warm">Contenido en construcción.</p>
+  <!-- ── 2. INTRO ───────────────────────────────────────────────────────── -->
+  <section class="py-16 md:py-20">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 text-center">
+      <p class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase mb-5">
+        Estudio a medida
+      </p>
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-agronexo-dark mb-6">
+        Más que consejos, una estrategia para tu finca
+      </h2>
+      <p class="font-body text-base md:text-lg text-agronexo-text leading-relaxed">
+        No damos recetas genéricas. Visitamos tu olivar, miramos los datos, hablamos contigo y te entregamos un plan adaptado a tu suelo, tu agua, tu cosecha y tu presupuesto.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── 3. QUÉ INCLUYE ─────────────────────────────────────────────────── -->
+  <section class="bg-agronexo-warm/5 py-16 md:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="mb-10 md:mb-12">
+        <p class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase mb-4">
+          Qué te llevas
+        </p>
+        <h2 class="font-display font-bold text-3xl md:text-4xl text-agronexo-dark">
+          Todo lo que entra en un estudio AgroNexo
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {includedItems.map(({ title, description, iconPath }) => (
+          <div class="flex flex-col gap-4 bg-white rounded-lg p-8 border border-agronexo-warm/20">
+            <div class="w-10 h-10 text-agronexo-olive">
+              <svg class="w-full h-full" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d={iconPath} />
+              </svg>
+            </div>
+            <h3 class="font-display font-bold text-lg text-agronexo-dark leading-snug">
+              {title}
+            </h3>
+            <p class="font-body text-sm text-agronexo-text leading-relaxed">
+              {description}
+            </p>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 4. CÓMO FUNCIONA ───────────────────────────────────────────────── -->
+  <section class="py-16 md:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="mb-10 md:mb-12">
+        <p class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase mb-4">
+          El proceso
+        </p>
+        <h2 class="font-display font-bold text-3xl md:text-4xl text-agronexo-dark">
+          Tres pasos, mucha claridad
+        </h2>
+      </div>
+
+      <div class="flex flex-col gap-10 md:flex-row md:gap-0">
+        {steps.map((step, i) => (
+          <PhaseStep
+            {...step}
+            isFirst={i === 0}
+            isLast={i === steps.length - 1}
+          />
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 5. POR QUÉ AGRONEXO ────────────────────────────────────────────── -->
+  <section class="bg-agronexo-warm/5 py-16 md:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center mb-10 md:mb-12">
+        <p class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase mb-4">
+          Qué nos diferencia
+        </p>
+        <h2 class="font-display font-bold text-3xl md:text-4xl text-agronexo-dark">
+          Por qué AgroNexo
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {reasons.map(({ title, description, iconPath }) => (
+          <div class="flex flex-col gap-4 bg-white rounded-lg p-8 border border-agronexo-warm/20">
+            <div class="w-10 h-10 rounded-md bg-agronexo-olive/10 flex items-center justify-center text-agronexo-olive shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d={iconPath} />
+              </svg>
+            </div>
+            <h3 class="font-display font-bold text-xl text-agronexo-dark leading-snug">
+              {title}
+            </h3>
+            <p class="font-body text-sm text-agronexo-text leading-relaxed">
+              {description}
+            </p>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 6. PUENTE → ADVISORY ───────────────────────────────────────────── -->
+  <section class="py-16 md:py-20">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 text-center">
+      <p class="font-display text-xs font-semibold tracking-widest text-agronexo-warm uppercase mb-5">
+        ¿Quieres más?
+      </p>
+      <h2 class="font-display font-bold text-2xl md:text-3xl text-agronexo-dark mb-5 leading-snug">
+        Después del estudio, te acompañamos hasta donde quieras llegar
+      </h2>
+      <p class="font-body text-base text-agronexo-text leading-relaxed mb-6">
+        El estudio inicial es la puerta de entrada. Si quieres ir más allá con un plan integral de mejora y seguimiento todo el año, conoce AgroNexo Advisory.
+      </p>
+      <a
+        href="/servicios#advisory"
+        class="font-display font-semibold text-sm tracking-wide text-agronexo-olive hover:text-agronexo-dark transition-colors duration-200"
+      >
+        Conoce AgroNexo Advisory →
+      </a>
+    </div>
+  </section>
+
+  <!-- ── 7. CTA FINAL ───────────────────────────────────────────────────── -->
+  <section class="bg-agronexo-dark py-20 md:py-28">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center text-white">
+      <h2 class="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight mb-6">
+        Hablemos de tu olivar
+      </h2>
+      <p class="font-body text-base md:text-lg text-white/70 max-w-xl mx-auto mb-10">
+        Cuéntanos cómo es tu finca y concertamos la primera visita.
+      </p>
+      <a
+        href="/contacto"
+        class="inline-block font-display font-semibold text-sm tracking-wide px-10 py-4 bg-agronexo-olive text-white rounded-md hover:bg-white hover:text-agronexo-dark transition-colors duration-200"
+      >
+        Reserva tu primera visita
+      </a>
     </div>
   </section>
 
