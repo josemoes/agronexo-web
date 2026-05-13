@@ -1,0 +1,611 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Calculadora de ahorro — AgroNexo Granada"
+  description="Calcula cuánto puede ahorrar tu olivar con AgroNexo. Estimación orientativa basada en datos reales del sector en Andalucía."
+>
+  <Fragment slot="head">
+    <script is:inline src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  </Fragment>
+
+  <!-- ── 1. HERO ─────────────────────────────────────────────────────────── -->
+  <section class="bg-agronexo-warm/10 py-14 md:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+      <p class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase mb-4">
+        Calculadora interactiva
+      </p>
+      <h1 class="font-display font-bold text-3xl md:text-5xl text-agronexo-dark leading-tight mb-5">
+        Calcula cuánto puede ahorrar tu olivar
+      </h1>
+      <p class="font-body text-base md:text-lg text-agronexo-text leading-relaxed max-w-xl mx-auto">
+        Una estimación orientativa, basada en datos del sector, sobre el potencial de mejora de tu finca con AgroNexo.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── 2. CALCULADORA ─────────────────────────────────────────────────── -->
+  <section class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row gap-10 lg:gap-14 items-start">
+
+        <!-- LEFT: Formulario -->
+        <div class="w-full lg:w-2/5 bg-agronexo-warm/10 rounded-xl p-7 md:p-9">
+          <p class="font-display font-bold text-lg text-agronexo-dark mb-7">
+            Cuéntanos sobre tu finca
+          </p>
+
+          <!-- Input 1: Hectáreas -->
+          <div class="flex flex-col gap-2 mb-7">
+            <label for="hectareas" class="font-display font-semibold text-xs tracking-wide text-agronexo-dark">
+              ¿Cuántas hectáreas de olivar tienes?
+            </label>
+            <div class="flex items-center gap-3">
+              <button
+                type="button"
+                id="btn-menos"
+                aria-label="Reducir hectáreas"
+                class="w-9 h-9 rounded-md border border-agronexo-warm/50 bg-white text-agronexo-dark font-bold text-lg leading-none flex items-center justify-center hover:border-agronexo-olive hover:text-agronexo-olive transition-colors duration-150 shrink-0"
+              >−</button>
+              <div class="relative flex-1">
+                <input
+                  type="number"
+                  id="hectareas"
+                  name="hectareas"
+                  min="1"
+                  max="500"
+                  value="25"
+                  class="w-full font-body text-sm text-agronexo-text border border-agronexo-warm/40 rounded-md px-4 py-2.5 text-center focus:outline-none focus:border-agronexo-olive bg-white"
+                />
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 font-body text-xs text-agronexo-warm pointer-events-none">ha</span>
+              </div>
+              <button
+                type="button"
+                id="btn-mas"
+                aria-label="Aumentar hectáreas"
+                class="w-9 h-9 rounded-md border border-agronexo-warm/50 bg-white text-agronexo-dark font-bold text-lg leading-none flex items-center justify-center hover:border-agronexo-olive hover:text-agronexo-olive transition-colors duration-150 shrink-0"
+              >+</button>
+            </div>
+          </div>
+
+          <!-- Input 2: Tipo de olivar -->
+          <fieldset class="flex flex-col gap-2 mb-7">
+            <legend class="font-display font-semibold text-xs tracking-wide text-agronexo-dark mb-2">
+              ¿Cómo es tu olivar?
+            </legend>
+            <label class="flex items-center gap-2.5 cursor-pointer">
+              <input type="radio" name="tipo" value="tradicional_secano" class="accent-agronexo-olive" />
+              <span class="font-body text-sm text-agronexo-text">Tradicional en secano</span>
+            </label>
+            <label class="flex items-center gap-2.5 cursor-pointer">
+              <input type="radio" name="tipo" value="tradicional_regadio" checked class="accent-agronexo-olive" />
+              <span class="font-body text-sm text-agronexo-text">Tradicional con riego</span>
+            </label>
+            <label class="flex items-center gap-2.5 cursor-pointer">
+              <input type="radio" name="tipo" value="intensivo" class="accent-agronexo-olive" />
+              <span class="font-body text-sm text-agronexo-text">Intensivo o superintensivo</span>
+            </label>
+          </fieldset>
+
+          <!-- Input 3: Edad de los olivos -->
+          <fieldset class="flex flex-col gap-2 mb-7">
+            <legend class="font-display font-semibold text-xs tracking-wide text-agronexo-dark mb-2">
+              ¿Qué edad tienen tus olivos?
+            </legend>
+            <label class="flex items-center gap-2.5 cursor-pointer">
+              <input type="radio" name="edad" value="joven" class="accent-agronexo-olive" />
+              <span class="font-body text-sm text-agronexo-text">Joven (menos de 15 años)</span>
+            </label>
+            <label class="flex items-center gap-2.5 cursor-pointer">
+              <input type="radio" name="edad" value="plenitud" checked class="accent-agronexo-olive" />
+              <span class="font-body text-sm text-agronexo-text">En plenitud (15 a 50 años)</span>
+            </label>
+            <label class="flex items-center gap-2.5 cursor-pointer">
+              <input type="radio" name="edad" value="centenario" class="accent-agronexo-olive" />
+              <span class="font-body text-sm text-agronexo-text">Centenario (más de 50 años)</span>
+            </label>
+          </fieldset>
+
+          <!-- Input 4: Provincia -->
+          <div class="flex flex-col gap-2 mb-7">
+            <label for="provincia" class="font-display font-semibold text-xs tracking-wide text-agronexo-dark">
+              ¿En qué provincia está tu finca?
+            </label>
+            <select
+              id="provincia"
+              name="provincia"
+              class="font-body text-sm text-agronexo-text border border-agronexo-warm/40 rounded-md px-4 py-2.5 focus:outline-none focus:border-agronexo-olive bg-white"
+            >
+              <option value="Granada" selected>Granada</option>
+              <option value="Jaen">Jaén</option>
+              <option value="Cordoba">Córdoba</option>
+              <option value="Malaga">Málaga</option>
+              <option value="Sevilla">Sevilla</option>
+              <option value="Otra">Otra provincia</option>
+            </select>
+          </div>
+
+          <!-- Ajustes avanzados -->
+          <details class="mb-6 group">
+            <summary class="font-display font-semibold text-xs tracking-wide text-agronexo-olive uppercase cursor-pointer list-none flex items-center gap-2 hover:text-agronexo-dark transition-colors duration-150">
+              <svg class="w-4 h-4 transition-transform duration-200 group-open:rotate-90" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+              Ajustes avanzados
+            </summary>
+            <div class="mt-4 flex flex-col gap-2">
+              <label for="precio" class="font-display font-semibold text-xs tracking-wide text-agronexo-dark">
+                Precio medio de tu aceituna (€/kg)
+              </label>
+              <input
+                type="number"
+                id="precio"
+                name="precio"
+                min="0.30"
+                max="1.50"
+                step="0.05"
+                value="0.60"
+                class="font-body text-sm text-agronexo-text border border-agronexo-warm/40 rounded-md px-4 py-2.5 focus:outline-none focus:border-agronexo-olive bg-white"
+              />
+              <p class="font-body text-xs text-agronexo-warm leading-relaxed">
+                Precio orientativo medio de la última campaña en Andalucía.
+              </p>
+            </div>
+          </details>
+
+          <p class="font-body text-xs text-agronexo-warm leading-relaxed">
+            Los resultados se actualizan automáticamente. Son una estimación orientativa basada en datos del sector.
+          </p>
+        </div>
+
+        <!-- RIGHT: Resultados -->
+        <div class="w-full lg:w-3/5 flex flex-col gap-8">
+
+          <!-- KPIs -->
+          <div class="flex flex-col gap-4">
+            <div>
+              <h3 class="font-display font-bold text-lg text-agronexo-dark">Tu beneficio estimado</h3>
+              <p class="font-body text-sm text-agronexo-warm mt-1">Suma de ahorros y producción extra trabajando con AgroNexo, ya descontado el coste del servicio.</p>
+            </div>
+            <div class="grid grid-cols-3 gap-4">
+              <div class="flex flex-col gap-1 text-center">
+                <span class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase">2 años</span>
+                <span id="kpi-2" class="font-display font-bold text-2xl md:text-3xl text-agronexo-dark tabular-nums">—</span>
+              </div>
+              <div class="flex flex-col gap-1 text-center border-x border-agronexo-warm/20">
+                <span class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase">5 años</span>
+                <span id="kpi-5" class="font-display font-bold text-2xl md:text-3xl text-agronexo-dark tabular-nums">—</span>
+              </div>
+              <div class="flex flex-col gap-1 text-center">
+                <span class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase">10 años</span>
+                <span id="kpi-10" class="font-display font-bold text-2xl md:text-3xl text-agronexo-dark tabular-nums">—</span>
+              </div>
+            </div>
+            <p class="font-body text-xs text-agronexo-warm leading-relaxed">
+              *El cálculo incluye el coste estimado del servicio AgroNexo Advisory: asesoramiento técnico, visitas periódicas, seguimiento y gestión de subvenciones.
+            </p>
+          </div>
+
+          <!-- Gráfico -->
+          <div class="relative w-full aspect-[4/3] md:aspect-[16/9]">
+            <canvas
+              id="grafico-ahorro"
+              role="img"
+              aria-label="Gráfico de ahorro acumulado proyectado a 10 años con escenario central y rango pesimista-optimista"
+            ></canvas>
+          </div>
+
+          <p class="font-body text-xs text-agronexo-warm leading-relaxed">
+            La línea central es el escenario más probable. La banda sombreada cubre desde el caso más conservador al más optimista. El cálculo ya incluye el coste del servicio AgroNexo, por lo que en los primeros años el retorno es más modesto: el valor real del acompañamiento se ve a medio plazo.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 3. CTA ──────────────────────────────────────────────────────────── -->
+  <section class="bg-agronexo-dark py-16 md:py-24">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center text-white">
+      <p class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase mb-4">
+        ¿Números que te convencen?
+      </p>
+      <h2 class="font-display font-bold text-3xl md:text-4xl leading-tight mb-5">
+        Hablemos de cómo conseguir estos resultados
+      </h2>
+      <p class="font-body text-base text-white/70 max-w-xl mx-auto mb-10">
+        Un Asesor Agrícola valida tu estimación con un estudio real de tu finca.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/contacto"
+          class="font-display font-semibold text-sm tracking-wide px-8 py-3 bg-agronexo-olive text-white rounded-md hover:bg-white hover:text-agronexo-dark transition-colors duration-200"
+        >
+          Reserva tu primera visita
+        </a>
+        <a
+          href="/asesoramiento"
+          class="font-display font-semibold text-sm tracking-wide px-8 py-3 border border-white/40 text-white rounded-md hover:bg-white/10 transition-colors duration-200"
+        >
+          Conoce el asesoramiento
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 4. CÓMO CALCULAMOS ─────────────────────────────────────────────── -->
+  <section class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="max-w-2xl mb-12">
+        <p class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase mb-4">
+          Cómo lo calculamos
+        </p>
+        <h2 class="font-display font-bold text-3xl md:text-4xl text-agronexo-dark mb-5 leading-snug">
+          Una estimación honesta, no una promesa
+        </h2>
+        <p class="font-body text-base text-agronexo-text leading-relaxed">
+          Los números que ves se basan en datos agregados de fincas reales en Andalucía, contrastados con literatura del sector y nuestra experiencia. Son una estimación orientativa, no una garantía de resultados. Cada finca tiene su historia y solo un estudio en campo da números precisos.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <div class="bg-agronexo-warm/10 rounded-xl p-7 flex flex-col gap-4">
+          <div class="w-10 h-10 rounded-md bg-agronexo-olive/10 flex items-center justify-center text-agronexo-olive shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+            </svg>
+          </div>
+          <h3 class="font-display font-bold text-lg text-agronexo-dark">Reducimos el consumo de agua entre un 8% y un 25%</h3>
+          <p class="font-body text-sm text-agronexo-text leading-relaxed">
+            Gracias a la planificación de riego y al hidroinfiltrador, que conduce el agua directamente a la zona radicular.
+          </p>
+        </div>
+
+        <div class="bg-agronexo-warm/10 rounded-xl p-7 flex flex-col gap-4">
+          <div class="w-10 h-10 rounded-md bg-agronexo-olive/10 flex items-center justify-center text-agronexo-olive shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+            </svg>
+          </div>
+          <h3 class="font-display font-bold text-lg text-agronexo-dark">Mejoramos la producción entre un 2% y un 7%</h3>
+          <p class="font-body text-sm text-agronexo-text leading-relaxed">
+            Con manejo de suelo y nutrición ajustada al ciclo del cultivo, las floraciones cuajan mejor y el calibre mejora.
+          </p>
+        </div>
+
+        <div class="bg-agronexo-warm/10 rounded-xl p-7 flex flex-col gap-4">
+          <div class="w-10 h-10 rounded-md bg-agronexo-olive/10 flex items-center justify-center text-agronexo-olive shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 14.25l6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185z" />
+            </svg>
+          </div>
+          <h3 class="font-display font-bold text-lg text-agronexo-dark">Ahorramos en fertilizantes entre un 4% y un 14%</h3>
+          <p class="font-body text-sm text-agronexo-text leading-relaxed">
+            Con dosificación según análisis real de tu finca: ni un kilo de más, ni un kilo de menos.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script is:inline>
+// ─── CONSTANTES DE CÁLCULO ────────────────────────────────────────────────────
+
+var produccionBaseKg = {
+  tradicional_secano:  2000,
+  tradicional_regadio: 4500,
+  intensivo:           9000,
+};
+
+var factorEdad = {
+  joven:      0.6,
+  plenitud:   1.0,
+  centenario: 0.85,
+};
+
+var costeAguaPorHa = {
+  tradicional_secano:  0,
+  tradicional_regadio: 380,
+  intensivo:           520,
+};
+
+var costeFertilizantesPorHa = {
+  tradicional_secano:  220,
+  tradicional_regadio: 320,
+  intensivo:           480,
+};
+
+var mejoras = {
+  produccion:    { pesimista: 0.02, central: 0.04, optimista: 0.07 },
+  ahorroAgua:    { pesimista: 0.08, central: 0.15, optimista: 0.25 },
+  ahorroFertilz: { pesimista: 0.04, central: 0.08, optimista: 0.14 },
+};
+
+var factorProvincia = {
+  Granada: 1.00,
+  Jaen:    1.05,
+  Cordoba: 1.02,
+  Malaga:  0.95,
+  Sevilla: 1.00,
+  Otra:    1.00,
+};
+
+var costeServicioPorHa = 80; // €/ha/año (AgroNexo Advisory, siempre incluido)
+
+// ─── CÁLCULO ──────────────────────────────────────────────────────────────────
+
+function calcularBeneficioAnual(inputs, escenario) {
+  var ha        = inputs.ha;
+  var tipo      = inputs.tipo;
+  var edad      = inputs.edad;
+  var provincia = inputs.provincia;
+  var precioKg  = inputs.precioKg;
+
+  var prodBase     = produccionBaseKg[tipo] * factorEdad[edad] * factorProvincia[provincia];
+  var ingresosBase = prodBase * ha * precioKg;
+  var aguaBase     = costeAguaPorHa[tipo] * ha;
+  var fertBase     = costeFertilizantesPorHa[tipo] * ha;
+
+  var ingresosExtra = ingresosBase * mejoras.produccion[escenario];
+  var ahorroAgua    = aguaBase     * mejoras.ahorroAgua[escenario];
+  var ahorroFert    = fertBase     * mejoras.ahorroFertilz[escenario];
+
+  return ingresosExtra + ahorroAgua + ahorroFert;
+}
+
+function calcularSerie(inputs, escenario) {
+  var beneficioAnual = calcularBeneficioAnual(inputs, escenario);
+  var netoPorAnio    = beneficioAnual - costeServicioPorHa * inputs.ha;
+  return Array.from({ length: 11 }, function(_, anio) {
+    return Math.round(netoPorAnio * anio);
+  });
+}
+
+// ─── LECTURA DE INPUTS ────────────────────────────────────────────────────────
+
+function leerInputs() {
+  var ha        = parseInt(document.getElementById('hectareas').value, 10) || 25;
+  var tipoEl    = document.querySelector('input[name="tipo"]:checked');
+  var edadEl    = document.querySelector('input[name="edad"]:checked');
+  var provincia = document.getElementById('provincia').value;
+  var precioKg  = parseFloat(document.getElementById('precio').value) || 0.60;
+
+  ha = Math.max(1, Math.min(500, ha));
+
+  return {
+    ha:        ha,
+    tipo:      tipoEl  ? tipoEl.value  : 'tradicional_regadio',
+    edad:      edadEl  ? edadEl.value  : 'plenitud',
+    provincia: provincia,
+    precioKg:  precioKg,
+  };
+}
+
+// ─── ANIMACIÓN DE KPIs ────────────────────────────────────────────────────────
+
+var kpiActual = { k2: 0, k5: 0, k10: 0 };
+
+var fmt = new Intl.NumberFormat('es-ES', {
+  style:                 'currency',
+  currency:              'EUR',
+  maximumFractionDigits: 0,
+});
+
+function animarKPI(elementId, desde, hasta, duracion) {
+  var el        = document.getElementById(elementId);
+  var inicio    = null;
+
+  function paso(timestamp) {
+    if (!inicio) inicio = timestamp;
+    var progreso = Math.min((timestamp - inicio) / duracion, 1);
+    var ease     = 1 - Math.pow(1 - progreso, 3);
+    var valor    = Math.round(desde + (hasta - desde) * ease);
+    el.textContent = fmt.format(valor);
+    if (progreso < 1) requestAnimationFrame(paso);
+  }
+
+  requestAnimationFrame(paso);
+}
+
+// ─── GRÁFICO ──────────────────────────────────────────────────────────────────
+
+var chart = null;
+var labels = ['Año 0','Año 1','Año 2','Año 3','Año 4','Año 5','Año 6','Año 7','Año 8','Año 9','Año 10'];
+
+var colorCentral   = '#193b29';
+var colorOliva     = '#6c8e32';
+var colorArea      = 'rgba(108,142,50,0.18)';
+var colorEje       = '#A2A092';
+var colorTooltipBg = '#193b29';
+
+function iniciarGrafico(seriePes, serieCen, serieOpt) {
+  var ctx = document.getElementById('grafico-ahorro').getContext('2d');
+
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          // dataset 0: pesimista (base del fill)
+          label:       'Escenario pesimista',
+          data:         seriePes,
+          borderColor:  'transparent',
+          borderWidth:  0,
+          pointRadius:  0,
+          fill:         false,
+          tension:      0.4,
+        },
+        {
+          // dataset 1: optimista (fill hacia dataset 0 crea el área)
+          label:            'Escenario optimista',
+          data:              serieOpt,
+          borderColor:       'transparent',
+          borderWidth:       0,
+          pointRadius:       0,
+          backgroundColor:   colorArea,
+          fill:              '-1',
+          tension:           0.4,
+        },
+        {
+          // dataset 2: central (línea visible)
+          label:           'Escenario central',
+          data:             serieCen,
+          borderColor:      colorCentral,
+          borderWidth:      3,
+          pointRadius:      0,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: colorCentral,
+          fill:             false,
+          tension:          0.4,
+        },
+      ],
+    },
+    options: {
+      responsive:          true,
+      maintainAspectRatio: true,
+      interaction: {
+        mode:         'index',
+        intersect:    false,
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: colorTooltipBg,
+          titleFont:       { family: 'Montserrat, system-ui, sans-serif', size: 12, weight: '600' },
+          bodyFont:        { family: '"DM Sans", system-ui, sans-serif', size: 12 },
+          padding:         12,
+          cornerRadius:    6,
+          callbacks: {
+            label: function(ctx) {
+              if (ctx.datasetIndex === 2) {
+                return ' Escenario central: ' + fmt.format(ctx.parsed.y);
+              }
+              if (ctx.datasetIndex === 0) {
+                return ' Rango: ' + fmt.format(ctx.parsed.y);
+              }
+              if (ctx.datasetIndex === 1) {
+                return ' hasta ' + fmt.format(ctx.parsed.y);
+              }
+              return '';
+            },
+          },
+        },
+      },
+      scales: {
+        x: {
+          grid:  { display: false },
+          ticks: {
+            font:  { family: '"DM Sans", system-ui, sans-serif', size: 11 },
+            color: colorEje,
+          },
+          border: { color: colorEje },
+        },
+        y: {
+          beginAtZero: false,
+          grid:  { color: 'rgba(162,160,146,0.15)' },
+          ticks: {
+            font:     { family: '"DM Sans", system-ui, sans-serif', size: 11 },
+            color:    colorEje,
+            callback: function(val) {
+              var abs    = Math.abs(val);
+              var prefix = val < 0 ? '-' : '';
+              if (abs >= 1000) return prefix + (abs / 1000).toLocaleString('es-ES') + 'k €';
+              return val + ' €';
+            },
+          },
+          border: { color: 'transparent' },
+        },
+      },
+    },
+  });
+}
+
+function actualizarGrafico(seriePes, serieCen, serieOpt) {
+  chart.data.datasets[0].data = seriePes;
+  chart.data.datasets[1].data = serieOpt;
+  chart.data.datasets[2].data = serieCen;
+  chart.update('active');
+}
+
+// ─── RECALCULAR ───────────────────────────────────────────────────────────────
+
+function recalcular() {
+  var inputs = leerInputs();
+
+  var seriePes = calcularSerie(inputs, 'pesimista');
+  var serieCen = calcularSerie(inputs, 'central');
+  var serieOpt = calcularSerie(inputs, 'optimista');
+
+  var k2  = serieCen[2];
+  var k5  = serieCen[5];
+  var k10 = serieCen[10];
+
+  animarKPI('kpi-2',  kpiActual.k2,  k2,  450);
+  animarKPI('kpi-5',  kpiActual.k5,  k5,  450);
+  animarKPI('kpi-10', kpiActual.k10, k10, 450);
+
+  kpiActual = { k2: k2, k5: k5, k10: k10 };
+
+  if (chart) {
+    actualizarGrafico(seriePes, serieCen, serieOpt);
+  } else {
+    iniciarGrafico(seriePes, serieCen, serieOpt);
+  }
+}
+
+// ─── DEBOUNCE ─────────────────────────────────────────────────────────────────
+
+var debounceTimer = null;
+
+function recalcularDebounced() {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(recalcular, 100);
+}
+
+// ─── BOTONES +/- ─────────────────────────────────────────────────────────────
+
+function initBotones() {
+  var input  = document.getElementById('hectareas');
+  var btnMas = document.getElementById('btn-mas');
+  var btnMen = document.getElementById('btn-menos');
+
+  btnMas.addEventListener('click', function() {
+    var val = parseInt(input.value, 10) || 25;
+    input.value = Math.min(500, val + 1);
+    recalcularDebounced();
+  });
+
+  btnMen.addEventListener('click', function() {
+    var val = parseInt(input.value, 10) || 25;
+    input.value = Math.max(1, val - 1);
+    recalcularDebounced();
+  });
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+
+document.addEventListener('DOMContentLoaded', function() {
+  initBotones();
+
+  // Escuchar cambios en todos los inputs
+  document.getElementById('hectareas').addEventListener('input', recalcularDebounced);
+  document.querySelectorAll('input[name="tipo"]').forEach(function(el) {
+    el.addEventListener('change', recalcular);
+  });
+  document.querySelectorAll('input[name="edad"]').forEach(function(el) {
+    el.addEventListener('change', recalcular);
+  });
+  document.getElementById('provincia').addEventListener('change', recalcular);
+  document.getElementById('precio').addEventListener('input', recalcularDebounced);
+
+  // Cálculo inicial
+  recalcular();
+});
+</script>

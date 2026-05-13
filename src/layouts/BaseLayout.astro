@@ -6,6 +6,7 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title?: string;
   description?: string;
+  extraHead?: boolean;
 }
 
 const {
@@ -45,6 +46,9 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? 'https://agronexo
     <!-- Preconnect for Google Fonts (improves load time) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Per-page head additions (e.g. page-specific scripts) -->
+    <slot name="head" />
   </head>
   <body>
     <Header />

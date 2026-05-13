@@ -70,9 +70,12 @@ Lo que NO copiamos:
 
 Si en algún momento necesitas una pieza con estado (carrusel, acordeón), prioriza una solución CSS-only o el `<details>` nativo de HTML. Solo si no hay forma, hablamos de añadir algo más.
 
+**Excepción documentada — `/calculadora`:**
+`/calculadora` es la **única página de la web que usa JavaScript en cliente**. Usa vanilla JS (sin frameworks) + **Chart.js 4.4.0 vía CDN** (`<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">`). El script de Chart.js se carga solo en el `<head>` de esa página, **no en BaseLayout**. Toda la lógica de cálculo y reactividad es vanilla JS en un `<script>` al final de la página (no `type="module"`). El resto de la web sigue siendo 100% estática sin JS en runtime.
+
 ---
 
-## Las 6 páginas
+## Las 7 páginas
 
 ```
 /                 → Home (hero + las 3 líneas + storytelling + CTA)
@@ -85,6 +88,9 @@ Si en algún momento necesitas una pieza con estado (carrusel, acordeón), prior
 /fincas           → Landing del paquete completo para fincas sin
                     cuidar (Fase 5).
 /contacto         → Página con formulario decorativo (no funcional).
+/calculadora      → Calculadora interactiva de ahorro y rendimiento.
+                    ÚNICA página con JS en cliente (vanilla + Chart.js).
+                    Ver excepción documentada en sección "Stack".
 ```
 
 Sin slugs dinámicos. Sin fichas individuales de producto/servicio. Cada landing agrupa sus cards en la misma página.
