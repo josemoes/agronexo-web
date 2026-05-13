@@ -1,32 +1,197 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroBanda from '../components/HeroBanda.astro';
+import ProductSection from '../components/ProductSection.astro';
+
+const products = [
+  {
+    name: 'Hidroinfiltrador',
+    badge: 'PATENTE UGR · AHORRO DE AGUA',
+    description: 'Sistema patentado por la Universidad de Granada que canaliza agua y nutrientes directamente a la zona radicular del olivo. Reduce la evaporación y la pérdida por escorrentía.',
+    benefits: [
+      'Reduce el consumo de agua hasta un 35%',
+      'Mejora la eficiencia del fertilizante',
+      'Compatible con riego por goteo existente',
+      'Instalación rápida sin obra mayor',
+    ],
+    specs: {
+      presentacion: 'Unidad',
+      aplicacion: 'Una por olivo',
+      disponibilidad: 'Stock disponible',
+    },
+    price: 'Desde 12 €/unidad',
+    image: '/images/productos/hidroinfiltrador.webp',
+    imageAlt: 'Unidad de hidroinfiltrador AgroNexo instalada junto al tronco de un olivo',
+    imageLeft: true,
+    bgClass: 'bg-white',
+  },
+  {
+    name: 'Melaza',
+    badge: 'BIO · MEJORA DE SUELO',
+    description: 'Alimenta la vida microbiana del suelo y mejora la asimilación de nutrientes por la raíz. Ideal como complemento en agricultura ecológica o como acelerador en olivares en transición.',
+    benefits: [
+      'Activa la microbiota del suelo en pocas semanas',
+      'Mejora la absorción de nitrógeno y fósforo',
+      'Reduce la dependencia de fertilizantes químicos',
+      'Apto para agricultura ecológica certificada',
+    ],
+    specs: {
+      presentacion: 'Bidón 25 L',
+      aplicacion: 'Foliar o radicular',
+      disponibilidad: 'Bajo pedido',
+    },
+    price: 'Desde 38 €/bidón',
+    image: '/images/productos/melaza.webp',
+    imageAlt: 'Bidón de melaza agrícola lista para aplicación foliar o radicular en olivar',
+    imageLeft: false,
+    bgClass: 'bg-agronexo-warm/5',
+  },
+  {
+    name: 'Nitrato potásico',
+    badge: 'ALTA SOLUBILIDAD · ENGORDE DE FRUTO',
+    description: 'Fertilizante de respuesta inmediata para la fase de cuajado y engorde de la aceituna. Aporta potasio y nitrógeno en una sola aplicación, ideal para olivares con producción intensiva.',
+    benefits: [
+      'Aumenta el calibre medio de la aceituna',
+      'Mejora la cuaja en floraciones débiles',
+      'Solubilidad total para fertirrigación',
+      'Sin cloruro, apto para suelos sensibles',
+    ],
+    specs: {
+      presentacion: 'Saco 25 kg',
+      aplicacion: 'Fertirrigación',
+      disponibilidad: 'Stock disponible',
+    },
+    price: 'Desde 42 €/saco',
+    image: '/images/productos/nitrato-potasico.webp',
+    imageAlt: 'Saco de nitrato potásico de 25 kg para fertirrigación en olivar intensivo',
+    imageLeft: true,
+    bgClass: 'bg-white',
+  },
+  {
+    name: 'Urea',
+    badge: 'AMPLIO ESPECTRO · LARGA DURACIÓN',
+    description: 'Aporte nitrogenado versátil para el desarrollo vegetativo del olivo. Liberación prolongada, ideal para fases iniciales del ciclo y como base de fertilización.',
+    benefits: [
+      'Estimula el crecimiento vegetativo',
+      'Coste por kg de N más competitivo del catálogo',
+      'Compatible con la mayoría de cultivos',
+      'Liberación gradual durante semanas',
+    ],
+    specs: {
+      presentacion: 'Saco 25 kg',
+      aplicacion: 'Foliar o granular',
+      disponibilidad: 'Stock disponible',
+    },
+    price: 'Desde 18 €/saco',
+    image: '/images/productos/urea.webp',
+    imageAlt: 'Saco de urea granulada de 25 kg para fertilización nitrogenada de base en olivar',
+    imageLeft: false,
+    bgClass: 'bg-agronexo-warm/5',
+  },
+];
 ---
 
 <BaseLayout
-  title="Productos — AgroNexo Granada"
-  description="Melaza, hidroinfiltradores, nitrato potásico y urea. Insumos agrícolas de calidad para el olivar y almendro de Granada."
+  title="Productos para tu olivar — AgroNexo Granada"
+  description="Melaza, hidroinfiltradores, nitrato potásico y urea. Insumos agrícolas seleccionados y recomendados según el diagnóstico de tu finca."
 >
 
-  <!-- Hero banda -->
-  <section
-    class="relative flex items-end min-h-[45vh] bg-agronexo-dark bg-cover bg-center"
-    style="background-image: url('/images/hero/productos.webp')"
-  >
-    <div class="absolute inset-0 bg-agronexo-dark/60"></div>
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 md:pb-16 w-full">
-      <p class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase mb-3">
-        AgroNexo
+  <!-- ── 1. HERO BANDA ───────────────────────────────────────────────────── -->
+  <HeroBanda
+    image="/images/hero/productos.webp"
+    eyebrow="AgroNexo · Productos"
+    title="Productos para tu olivar"
+    subtitle="Insumos seleccionados, recomendados según tu finca y tu momento del cultivo."
+  />
+
+  <!-- ── 2. INTRO ───────────────────────────────────────────────────────── -->
+  <section class="py-16 md:py-20">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 text-center">
+      <p class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase mb-5">
+        Catálogo
       </p>
-      <h1 class="font-display font-bold text-4xl md:text-5xl text-white leading-tight">
-        Productos
-      </h1>
+      <p class="font-body text-base md:text-lg text-agronexo-text leading-relaxed">
+        AgroNexo no vende fertilizantes de catálogo. Seleccionamos los insumos que el diagnóstico de tu finca recomienda: el producto adecuado, en la cantidad justa y en el momento agronómicamente correcto.
+      </p>
     </div>
   </section>
 
-  <!-- Placeholder -->
-  <section class="py-20 md:py-28">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <p class="font-body text-agronexo-warm">Contenido en construcción.</p>
+  <!-- ── 3. PRODUCTOS (zigzag) ──────────────────────────────────────────── -->
+  {products.map((product) => (
+    <ProductSection {...product} />
+  ))}
+
+  <!-- ── 4. DOS FORMAS DE ACERTAR ──────────────────────────────────────── -->
+  <section class="bg-white py-16 md:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Header -->
+      <div class="text-center mb-12 md:mb-16">
+        <p class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase mb-4">
+          ¿No sabes qué necesita tu finca?
+        </p>
+        <h2 class="font-display font-bold text-3xl md:text-4xl text-agronexo-dark mb-4">
+          Dos formas de acertar
+        </h2>
+        <p class="font-body text-base text-agronexo-text max-w-xl mx-auto">
+          Si no tienes claro qué producto te conviene, te ayudamos a decidir antes de pedir.
+        </p>
+      </div>
+
+      <!-- Two columns -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- Column 1: Diagnóstico rápido -->
+        <div class="flex flex-col gap-5 bg-agronexo-warm/5 rounded-xl p-8 md:p-10">
+          <div class="w-12 h-12 text-agronexo-olive">
+            <svg class="w-full h-full" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.127 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+            </svg>
+          </div>
+          <p class="font-display font-semibold text-xs tracking-widest uppercase text-agronexo-warm">
+            2 minutos · Por WhatsApp
+          </p>
+          <h3 class="font-display font-bold text-xl md:text-2xl text-agronexo-dark">
+            Diagnostica tu finca al momento
+          </h3>
+          <p class="font-body text-sm text-agronexo-text leading-relaxed flex-1">
+            Cuéntale a nuestro bot cómo es tu olivar y recibirás una recomendación personalizada de productos, sin compromiso.
+          </p>
+          <a
+            href="https://t.me/diagnostico_finca_bot"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="self-start font-display font-semibold text-sm tracking-wide px-6 py-3 bg-agronexo-olive text-white rounded-md hover:bg-agronexo-dark transition-colors duration-200"
+          >
+            Abrir el diagnóstico
+          </a>
+        </div>
+
+        <!-- Column 2: Asesoramiento profundo -->
+        <div class="flex flex-col gap-5 bg-agronexo-warm/5 rounded-xl p-8 md:p-10">
+          <div class="w-12 h-12 text-agronexo-olive">
+            <svg class="w-full h-full" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+            </svg>
+          </div>
+          <p class="font-display font-semibold text-xs tracking-widest uppercase text-agronexo-warm">
+            Visita técnica · Plan a medida
+          </p>
+          <h3 class="font-display font-bold text-xl md:text-2xl text-agronexo-dark">
+            Habla con un Agro Advisor
+          </h3>
+          <p class="font-body text-sm text-agronexo-text leading-relaxed flex-1">
+            Si quieres un plan completo de mejora, un experto visita tu finca y te diseña una estrategia a medida.
+          </p>
+          <a
+            href="/asesoramiento"
+            class="self-start font-display font-semibold text-sm tracking-wide px-6 py-3 bg-agronexo-olive text-white rounded-md hover:bg-agronexo-dark transition-colors duration-200"
+          >
+            Conoce el asesoramiento
+          </a>
+        </div>
+
+      </div>
     </div>
   </section>
 

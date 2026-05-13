@@ -1,0 +1,37 @@
+---
+interface Props {
+  image: string;
+  eyebrow: string;
+  title: string;
+  subtitle?: string;
+  minHeight?: string;
+}
+
+const {
+  image,
+  eyebrow,
+  title,
+  subtitle,
+  minHeight = 'min-h-[50vh]',
+} = Astro.props;
+---
+
+<section
+  class={`relative flex items-end ${minHeight} bg-agronexo-dark bg-cover bg-center`}
+  style={`background-image: url('${image}')`}
+>
+  <div class="absolute inset-0 bg-agronexo-dark/65"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 md:pb-16 w-full">
+    <p class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase mb-3">
+      {eyebrow}
+    </p>
+    <h1 class="font-display font-bold text-4xl md:text-5xl text-white leading-tight max-w-xl">
+      {title}
+    </h1>
+    {subtitle && (
+      <p class="font-body text-base md:text-lg text-white/75 mt-4 max-w-lg">
+        {subtitle}
+      </p>
+    )}
+  </div>
+</section>

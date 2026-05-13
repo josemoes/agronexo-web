@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroBanda from '../components/HeroBanda.astro';
 ---
 
 <BaseLayout
@@ -8,20 +9,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 >
 
   <!-- Hero banda -->
-  <section
-    class="relative flex items-end min-h-[45vh] bg-agronexo-dark bg-cover bg-center"
-    style="background-image: url('/images/hero/servicios.webp')"
-  >
-    <div class="absolute inset-0 bg-agronexo-dark/60"></div>
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 md:pb-16 w-full">
-      <p class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase mb-3">
-        AgroNexo Advisory
-      </p>
-      <h1 class="font-display font-bold text-4xl md:text-5xl text-white leading-tight">
-        Servicios
-      </h1>
-    </div>
-  </section>
+  <HeroBanda
+    image="/images/hero/servicios.webp"
+    eyebrow="AgroNexo Advisory"
+    title="Servicios para tu finca"
+    subtitle="Desde una visita técnica puntual hasta un proyecto integral de optimización."
+  />
 
   <!-- Placeholder -->
   <section class="py-20 md:py-28">
