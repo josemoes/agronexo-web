@@ -1,25 +1,155 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroBanda from '../components/HeroBanda.astro';
+import CaseCard from '../components/CaseCard.astro';
+
+const processBlocks = [
+  {
+    number: '01',
+    eyebrow: 'EVALUACIÓN TÉCNICA',
+    title: 'Conocemos tu finca',
+    description: 'Visita in-situ para evaluar el estado del olivar, el suelo, el riego y el potencial real de producción. Sin coste ni compromiso.',
+  },
+  {
+    number: '02',
+    eyebrow: 'DISEÑO PRODUCTIVO',
+    title: 'Trazamos el plan',
+    description: 'Definimos el modelo de explotación más adecuado: qué mejorar, qué inversión requiere y qué renta puedes esperar según el escenario.',
+  },
+  {
+    number: '03',
+    eyebrow: 'BÚSQUEDA DEL EXPLOTADOR',
+    title: 'Encontramos al socio adecuado',
+    description: 'De nuestra red de agricultores profesionales, seleccionamos al explotador que mejor encaja con tu finca y tus condiciones.',
+  },
+  {
+    number: '04',
+    eyebrow: 'ACOMPAÑAMIENTO CONTRACTUAL',
+    title: 'Cerramos el acuerdo contigo',
+    description: 'Te asesoramos en la negociación del contrato de arrendamiento o cesión. Tus intereses, defendidos.',
+  },
+];
 ---
 
 <BaseLayout
   title="Fincas — AgroNexo Granada"
-  description="Activación de tierras infrautilizadas con un paquete completo: arrendamiento, asesoramiento y gestión integral del olivar y almendro."
+  description="Activación de tierras infrautilizadas con un paquete completo: evaluación técnica, plan productivo, búsqueda de explotador y acompañamiento contractual."
 >
 
-  <!-- Hero banda -->
+  <!-- ── 1. HERO BANDA ───────────────────────────────────────────────────── -->
   <HeroBanda
     image="/images/hero/fincas.webp"
     eyebrow="AgroNexo Fincas"
-    title="Tu finca, activada"
-    subtitle="Tierras sin gestionar convertidas en olivares rentables. Nosotros nos encargamos de todo."
+    title="Tu finca, cuidada. Tu renta, garantizada."
+    subtitle="Tierras infrautilizadas que vuelven a producir. Tú sigues siendo el dueño."
   />
 
-  <!-- Placeholder -->
+  <!-- ── 2. ¿TIENES TIERRAS QUE NO ESTÁS APROVECHANDO? ─────────────────── -->
   <section class="py-20 md:py-28">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <p class="font-body text-agronexo-warm">Contenido en construcción.</p>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
+
+        <!-- Text -->
+        <div>
+          <p class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase mb-5">
+            El problema que nadie quiere nombrar
+          </p>
+          <h2 class="font-display font-bold text-3xl md:text-4xl text-agronexo-dark mb-6 leading-snug">
+            ¿Tienes tierras que no estás aprovechando?
+          </h2>
+          <div class="font-body text-base md:text-lg text-agronexo-text leading-relaxed space-y-4">
+            <p>
+              Quizá tienes una finca que tu padre cuidó toda su vida y que ahora no produces como debería. Quizá llevas años viendo que los olivos piden más de lo que puedes darles.
+            </p>
+            <p>
+              No es culpa tuya: una finca bien llevada exige dedicación, conocimiento y recursos. AgroNexo FINCAS existe para esos casos. Ponemos tu tierra a producir con un plan serio, buscamos al explotador adecuado y te garantizamos una renta estable.
+            </p>
+            <p>
+              Tú sigues siendo el dueño.
+            </p>
+          </div>
+        </div>
+
+        <!-- Image -->
+        <div class="overflow-hidden rounded-lg aspect-[4/3]">
+          <img
+            src="/images/storytelling/manos-aceitunas.webp"
+            alt="Manos de agricultor sosteniendo tierra fértil de olivar en Granada"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 3. QUÉ HACE AGRONEXO FINCAS ───────────────────────────────────── -->
+  <section class="bg-agronexo-warm/5 py-16 md:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="mb-10 md:mb-12">
+        <p class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase mb-4">
+          Nuestro proceso
+        </p>
+        <h2 class="font-display font-bold text-3xl md:text-4xl text-agronexo-dark">
+          Qué hace AgroNexo FINCAS por ti
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {processBlocks.map((block) => (
+          <div class="flex flex-col gap-4 bg-white rounded-lg p-8 border border-agronexo-warm/20">
+            <span class="font-display font-bold text-4xl text-agronexo-olive leading-none" aria-hidden="true">
+              {block.number}
+            </span>
+            <p class="font-display font-semibold text-xs tracking-widest uppercase text-agronexo-warm">
+              {block.eyebrow}
+            </p>
+            <h3 class="font-display font-bold text-xl text-agronexo-dark leading-snug">
+              {block.title}
+            </h3>
+            <p class="font-body text-sm text-agronexo-text leading-relaxed">
+              {block.description}
+            </p>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 4. CASO REAL ───────────────────────────────────────────────────── -->
+  <CaseCard
+    image="https://images.unsplash.com/photo-1624963166345-1b5caa966d21?w=800&q=80&auto=format&fit=crop"
+    imageAlt="Mar de olivos en la campiña de Úbeda, Jaén — finca activada y en producción"
+    eyebrow="CASO REAL · OLIVAR EN PRODUCCIÓN"
+    quote="Llevaba tres años sin saber qué hacer con la finca de mi padre. Ahora produce y yo cobro una renta fija cada año."
+    authorName="Antonio Muñoz"
+    authorRole="Propietario en Martos, Jaén"
+    stats={[
+      { label: 'Superficie', value: '12,5 ha' },
+      { label: 'Variedad', value: 'Picual' },
+      { label: 'Estado inicial', value: 'Abandono parcial' },
+      { label: 'Resultado', value: 'Arrendamiento activo' },
+    ]}
+  />
+
+  <!-- ── 5. CTA FINAL ───────────────────────────────────────────────────── -->
+  <section class="bg-agronexo-dark border-t border-agronexo-olive/30 py-20 md:py-28">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center text-white">
+      <h2 class="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight mb-6">
+        Cuéntanos qué finca tienes.<br class="hidden sm:inline" /> La valoramos sin compromiso.
+      </h2>
+      <p class="font-body text-base md:text-lg text-white/70 max-w-xl mx-auto mb-10">
+        Sin visita comercial, sin presión. Solo una primera conversación para ver si podemos ayudarte.
+      </p>
+      <a
+        href="/contacto"
+        class="inline-block font-display font-semibold text-sm tracking-wide px-10 py-4 bg-agronexo-olive text-white rounded-md hover:bg-white hover:text-agronexo-dark transition-colors duration-200"
+      >
+        Habla con AgroNexo Fincas
+      </a>
     </div>
   </section>
 
