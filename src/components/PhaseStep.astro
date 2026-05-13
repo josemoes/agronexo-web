@@ -1,0 +1,31 @@
+---
+interface Props {
+  number: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  isFirst?: boolean;
+  isLast?: boolean;
+}
+
+const { number, eyebrow, title, description, isFirst = false, isLast = false } = Astro.props;
+
+const classes = ['flex flex-col gap-3 flex-1'];
+if (!isLast) classes.push('md:pr-8 md:border-r md:border-agronexo-warm/30');
+if (!isFirst) classes.push('md:pl-8');
+---
+
+<div class={classes.join(' ')}>
+  <span class="font-display font-bold text-5xl text-agronexo-olive leading-none" aria-hidden="true">
+    {number}
+  </span>
+  <p class="font-display font-semibold text-xs tracking-widest uppercase text-agronexo-warm">
+    {eyebrow}
+  </p>
+  <h3 class="font-display font-bold text-base md:text-lg text-agronexo-dark leading-snug">
+    {title}
+  </h3>
+  <p class="font-body text-sm text-agronexo-text leading-relaxed">
+    {description}
+  </p>
+</div>

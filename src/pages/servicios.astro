@@ -1,25 +1,340 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroBanda from '../components/HeroBanda.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import PhaseStep from '../components/PhaseStep.astro';
+
+const puntualServices = [
+  {
+    eyebrow: 'TEMPORADA INVIERNO',
+    title: 'Poda de olivar',
+    description: 'Poda profesional adaptada a la edad de tu olivar y al objetivo de producción de la próxima campaña. Equipo propio con experiencia en variedad picual y arbequina.',
+    dataPoints: ['Desde 0,80 €/árbol*', 'Hasta 25 árboles/jornal', 'Residuos triturados in situ'],
+    ctaLabel: 'Solicita presupuesto',
+    ctaSecondary: { label: 'Descarga la guía de poda gratis', href: '#guia-poda' },
+  },
+  {
+    eyebrow: 'LABORATORIO ACREDITADO',
+    title: 'Análisis de suelo',
+    description: 'Tomamos muestras representativas de tu finca y enviamos a laboratorio. Te entregamos un informe interpretado en lenguaje claro: qué te falta, qué te sobra, qué hacer.',
+    dataPoints: ['Desde 95 €/finca*', 'Resultados en 7-10 días', 'Incluye interpretación técnica'],
+    ctaLabel: 'Pídelo aquí',
+  },
+  {
+    eyebrow: 'FERTILIDAD Y VIDA',
+    title: 'Cuidado integral del suelo',
+    description: 'Cubiertas vegetales, enmiendas orgánicas y biofertilización. Mejoramos la estructura, la retención de agua y la vida microbiana de tu finca durante la campaña.',
+    dataPoints: ['Plan por temporada', 'Productos seleccionados', 'Compatible con ecológico'],
+    ctaLabel: 'Consúltanos',
+  },
+  {
+    eyebrow: 'SIN COMPROMISO',
+    title: 'Visita técnica de Agro Advisor',
+    description: 'Un técnico recorre tu finca contigo durante 2-3 horas, observa el estado del olivar y te deja un informe básico con las primeras recomendaciones.',
+    dataPoints: ['Desde 120 €/visita*', '2-3 horas en finca', 'Informe en 48h'],
+    ctaLabel: 'Reserva visita',
+  },
+];
+
+const guideBullets = [
+  'Calendario de poda mes a mes',
+  'Tipos de poda según edad del olivar',
+  'Herramientas recomendadas y mantenimiento',
+  'Errores comunes que reducen tu cosecha',
+];
+
+const phases = [
+  {
+    number: '01',
+    eyebrow: 'CONOCEMOS TU FINCA',
+    title: 'Diagnóstico',
+    description: 'Visita técnica, análisis de riego, suelo y prácticas actuales. Sabrás exactamente dónde puedes mejorar y cuánto.',
+  },
+  {
+    number: '02',
+    eyebrow: 'DISEÑAMOS LA ESTRATEGIA',
+    title: 'Plan a medida',
+    description: 'Te entregamos un plan claro con prioridades, plazos y resultados esperados. Decides tú, sin sorpresas.',
+  },
+  {
+    number: '03',
+    eyebrow: 'NOS ENCARGAMOS DE TODO',
+    title: 'Puesta en marcha',
+    description: 'Coordinamos instaladores, productos y técnicos. Tú solo decides cuándo empezamos.',
+  },
+  {
+    number: '04',
+    eyebrow: 'TE ACOMPAÑAMOS TODO EL AÑO',
+    title: 'Seguimiento',
+    description: 'Avisos con consejos en cada momento del cultivo, visitas técnicas periódicas y ajustes según vaya la campaña.',
+  },
+  {
+    number: '05',
+    eyebrow: 'COBRAS LO QUE TE CORRESPONDE',
+    title: 'Ayudas y subvenciones',
+    description: 'Identificamos las ayudas a las que puedes acogerte y nos encargamos del papeleo. Cobras tú.',
+  },
+];
 ---
 
 <BaseLayout
   title="Servicios — AgroNexo Granada"
-  description="Servicios de asesoramiento agrícola: visita técnica, análisis de suelo, poda y proyectos integrales SCAN, DESIGN, DEPLOY, CONTROL y FUNDING."
+  description="Servicios de asesoramiento agrícola para el olivar: poda, análisis de suelo, visita técnica y plan integral AgroNexo Advisory."
 >
 
-  <!-- Hero banda -->
+  <!-- ── 1. HERO BANDA ───────────────────────────────────────────────────── -->
   <HeroBanda
     image="/images/hero/servicios.webp"
     eyebrow="AgroNexo Advisory"
     title="Servicios para tu finca"
-    subtitle="Desde una visita técnica puntual hasta un proyecto integral de optimización."
+    subtitle="Desde una poda puntual hasta un plan integral de optimización."
   />
 
-  <!-- Placeholder -->
-  <section class="py-20 md:py-28">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <p class="font-body text-agronexo-warm">Contenido en construcción.</p>
+  <!-- ── 2. INTRO ───────────────────────────────────────────────────────── -->
+  <section class="py-16 md:py-20">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 text-center">
+      <p class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase mb-5">
+        Dos formas de trabajar contigo
+      </p>
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-agronexo-dark mb-6">
+        Servicios puntuales o plan integral
+      </h2>
+      <p class="font-body text-base md:text-lg text-agronexo-text leading-relaxed">
+        Si necesitas una intervención concreta, te la hacemos y listo. Si quieres ir más allá, te diseñamos un plan completo de mejora con acompañamiento todo el año.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── 3. SERVICIOS PUNTUALES ─────────────────────────────────────────── -->
+  <section class="bg-agronexo-warm/5 py-16 md:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="mb-10 md:mb-12">
+        <p class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase mb-4">
+          Servicios puntuales
+        </p>
+        <h2 class="font-display font-bold text-3xl md:text-4xl text-agronexo-dark">
+          Lo que necesitas, cuando lo necesitas
+        </h2>
+      </div>
+
+      <!-- 4-card grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+        {puntualServices.map((service) => (
+          <ServiceCard {...service} />
+        ))}
+      </div>
+
+      <!-- Service 5: open band -->
+      <div class="rounded-lg bg-agronexo-dark px-8 py-10 md:px-12 md:py-12 flex flex-col md:flex-row md:items-center gap-6 md:gap-12">
+        <div class="flex-1">
+          <p class="font-display font-semibold text-xs tracking-widest uppercase text-agronexo-olive mb-3">
+            Tu caso es único
+          </p>
+          <h3 class="font-display font-bold text-2xl md:text-3xl text-white mb-3">
+            ¿Necesitas otra cosa?
+          </h3>
+          <p class="font-body text-sm md:text-base text-white/75 leading-relaxed max-w-2xl">
+            Cada olivar tiene su historia. Si lo que necesitas no está aquí, cuéntanoslo. Tenemos red de técnicos especializados en injertos, recuperación de fincas, reformas hidráulicas y mucho más.
+          </p>
+        </div>
+        <div class="shrink-0">
+          <a
+            href="/contacto"
+            class="inline-block font-display font-semibold text-sm tracking-wide px-6 py-3 bg-agronexo-olive text-white rounded-md hover:bg-white hover:text-agronexo-dark transition-colors duration-200"
+          >
+            Cuéntanos qué necesitas
+          </a>
+        </div>
+      </div>
+
+      <!-- Disclaimer -->
+      <p class="font-body text-xs text-agronexo-warm mt-6">
+        *Precios orientativos. Consulta condiciones según tamaño y ubicación de la finca.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ── 4. GUÍA DE PODA ────────────────────────────────────────────────── -->
+  <section id="guia-poda" class="bg-white">
+    <div class="flex flex-col md:flex-row">
+
+      <!-- Image -->
+      <div class="w-full md:w-1/2 shrink-0 aspect-[5/4] md:aspect-auto">
+        <img
+          src="https://images.unsplash.com/photo-1727355661422-2ca983a59e8e?w=800&q=80&auto=format&fit=crop"
+          alt="Camino entre olivos en invierno en el paisaje rural de Granada, listo para la poda"
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+      </div>
+
+      <!-- Content -->
+      <div class="w-full md:w-1/2 flex items-start justify-center py-12 md:py-16">
+        <div class="w-full max-w-lg px-6 md:px-10 lg:px-14 flex flex-col gap-6">
+
+          <p class="font-display font-semibold text-xs tracking-widest uppercase text-agronexo-olive">
+            Guía gratuita · 20 páginas
+          </p>
+          <div>
+            <h2 class="font-display font-bold text-3xl md:text-4xl text-agronexo-dark leading-tight mb-2">
+              Guía de poda del olivar andaluz
+            </h2>
+            <p class="font-body text-base text-agronexo-warm">
+              Todo lo que necesitas saber para podar tu olivar este invierno.
+            </p>
+          </div>
+          <p class="font-body text-sm text-agronexo-text leading-relaxed">
+            Hemos resumido en una guía clara y práctica los criterios que aplicamos en cada poda profesional. Cuándo podar según la edad del olivar, cómo orientar la copa para mejor rendimiento, qué herramientas usar y qué errores evitar. Pensada para olivar tradicional andaluz.
+          </p>
+
+          <!-- Bullets -->
+          <ul class="flex flex-col gap-2">
+            {guideBullets.map((bullet) => (
+              <li class="flex items-start gap-3">
+                <svg class="w-4 h-4 shrink-0 mt-0.5 text-agronexo-olive" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+                <span class="font-body text-sm text-agronexo-text">{bullet}</span>
+              </li>
+            ))}
+          </ul>
+
+          <!-- Decorative download form -->
+          <div role="form" aria-label="Formulario de descarga de la guía de poda" class="flex flex-col gap-4">
+
+            <div class="flex flex-col gap-1.5">
+              <label for="nombre" class="font-display font-semibold text-xs tracking-wide text-agronexo-dark">
+                Nombre completo
+              </label>
+              <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                placeholder="Manuel Ortega"
+                class="font-body text-sm text-agronexo-text border border-agronexo-warm/40 rounded-md px-4 py-2.5 focus:outline-none focus:border-agronexo-olive placeholder:text-agronexo-warm/60"
+              />
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="email" class="font-display font-semibold text-xs tracking-wide text-agronexo-dark">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="manuel@example.com"
+                class="font-body text-sm text-agronexo-text border border-agronexo-warm/40 rounded-md px-4 py-2.5 focus:outline-none focus:border-agronexo-olive placeholder:text-agronexo-warm/60"
+              />
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="telefono" class="font-display font-semibold text-xs tracking-wide text-agronexo-dark">
+                Teléfono
+                <span class="font-body font-normal text-agronexo-warm">(opcional)</span>
+              </label>
+              <input
+                type="tel"
+                id="telefono"
+                name="telefono"
+                placeholder="600 000 000"
+                class="font-body text-sm text-agronexo-text border border-agronexo-warm/40 rounded-md px-4 py-2.5 focus:outline-none focus:border-agronexo-olive placeholder:text-agronexo-warm/60"
+              />
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="hectareas" class="font-display font-semibold text-xs tracking-wide text-agronexo-dark">
+                Hectáreas de olivar
+              </label>
+              <select
+                id="hectareas"
+                name="hectareas"
+                class="font-body text-sm text-agronexo-text border border-agronexo-warm/40 rounded-md px-4 py-2.5 focus:outline-none focus:border-agronexo-olive bg-white"
+              >
+                <option value="">Selecciona una opción</option>
+                <option value="lt5">Menos de 5 ha</option>
+                <option value="5-15">5 – 15 ha</option>
+                <option value="15-50">15 – 50 ha</option>
+                <option value="gt50">Más de 50 ha</option>
+              </select>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <input
+                type="checkbox"
+                id="rgpd"
+                name="rgpd"
+                class="mt-0.5 shrink-0 accent-agronexo-olive"
+              />
+              <label for="rgpd" class="font-body text-xs text-agronexo-text leading-relaxed">
+                Acepto recibir información comercial de AgroNexo. Puedo darme de baja cuando quiera.
+              </label>
+            </div>
+
+            <button
+              type="button"
+              class="font-display font-semibold text-sm tracking-wide px-6 py-3 bg-agronexo-olive text-white rounded-md hover:bg-agronexo-dark transition-colors duration-200 text-center"
+            >
+              Descargar guía gratis
+            </button>
+
+            <p class="font-body text-xs text-agronexo-warm">
+              *Esta descarga es decorativa en el prototipo. No se envía ningún dato.
+            </p>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 5. AGRONEXO ADVISORY ───────────────────────────────────────────── -->
+  <section class="py-16 md:py-24 bg-agronexo-warm/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center mb-12 md:mb-16">
+        <p class="font-display text-xs font-semibold tracking-widest text-agronexo-olive uppercase mb-4">
+          Plan integral
+        </p>
+        <h2 class="font-display font-bold text-3xl md:text-4xl text-agronexo-dark mb-4">
+          AgroNexo Advisory: tu olivar, cuidado todo el año
+        </h2>
+        <p class="font-body text-base md:text-lg text-agronexo-text max-w-xl mx-auto">
+          Si quieres que el olivar dé un salto real, te acompañamos en las 5 fases del proceso. Tú decides hasta dónde quieres llegar.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-10 md:flex-row md:gap-0">
+        {phases.map((phase, i) => (
+          <PhaseStep
+            {...phase}
+            isFirst={i === 0}
+            isLast={i === phases.length - 1}
+          />
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 6. CTA FINAL ───────────────────────────────────────────────────── -->
+  <section class="bg-agronexo-dark py-20 md:py-28">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center text-white">
+      <h2 class="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight mb-6">
+        ¿No sabes cuál encaja<br class="hidden sm:inline" /> con tu finca?
+      </h2>
+      <p class="font-body text-base md:text-lg text-white/70 max-w-xl mx-auto mb-10">
+        Cuéntanos cómo es tu olivar y te recomendamos un plan a medida.
+      </p>
+      <a
+        href="/asesoramiento"
+        class="inline-block font-display font-semibold text-sm tracking-wide px-10 py-4 bg-agronexo-olive text-white rounded-md hover:bg-white hover:text-agronexo-dark transition-colors duration-200"
+      >
+        Habla con un asesor
+      </a>
     </div>
   </section>
 
